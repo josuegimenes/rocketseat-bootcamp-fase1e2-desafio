@@ -48,6 +48,15 @@ server.get("/projects", (req, res) => {
   return res.json(projects);
 });
 
+//Lista apenas 1 projeto
+server.get("/projects/:id", checkProjectExists, (req, res) => {
+  const { id } = req.params;
+
+  const project = projects.find(p => p.id == id);
+
+  return res.json(project);
+});
+
 //Cria um projeto
 server.post("/projects", checkRequestBodyId, (req, res) => {
   const { id, title } = req.body;
